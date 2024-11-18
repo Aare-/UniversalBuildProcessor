@@ -1,0 +1,25 @@
+{
+  "ANDROID_APP_NAME": "PROD Android App",
+  "ANDROID_PACKAGE_NAME": "com.test.android.prod",
+  "ANDROID_VERSION_CODE": 1,
+  "ANDROID_VERSION_NAME": "1.0.0",
+  "ANDROID_KEYSTORE_PATH": "BuildConfig/prod_test.keystore",
+  "ANDROID_KEYSTORE_PASSWORD": "prod_android_keystore_password",
+  "ANDROID_KEYALIAS": "prod_android_keyalias",
+  "ANDROID_KEYALIAS_PASSWORD": "prod_android_keyalias_password",
+
+  "IOS_BUNDLE_ID": "com.test.ios_bundle.prod",
+  "IOS_SKU": "com.test.ios_sku.prod",
+  "IOS_VERSION_CODE": "0.1.1",
+  "IOS_BUILD_ID": "1.0",
+  "IOS_TEAM_ID": "PROD_IOS_TEAM_ID",
+  "IOS_APPLE_ID": "prod@test.co",
+  "IOS_APP_ID": "0987654321",
+  "IOS_SIGNING_ENTITY": "PROD Signing Identity",
+  "IOS_PROVISIONING_PROFILE": "BuildConfig/prodMobileProvision.mobileprovision",
+  "IOS_API_KEY": "BuildConfig/PROD_AuthKey_XXXXXX.p8",
+  "IOS_APP_NAME": "PROD iOS App",
+
+  "APPSFLYER_APP_ID": "id987654321",
+  "APPSFLYER_DEV_KEY": "ZXCYSGDHKLFDKSDD"
+}

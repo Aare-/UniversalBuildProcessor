@@ -1,0 +1,25 @@
+{
+  "ANDROID_APP_NAME": "QA Android App",
+  "ANDROID_PACKAGE_NAME": "com.test.android.qa",
+  "ANDROID_VERSION_CODE": 1,
+  "ANDROID_VERSION_NAME": "1.0.0",
+  "ANDROID_KEYSTORE_PATH": "BuildConfig/qa_test.keystore",
+  "ANDROID_KEYSTORE_PASSWORD": "qa_android_keystore_password",
+  "ANDROID_KEYALIAS": "qa_android_keyalias",
+  "ANDROID_KEYALIAS_PASSWORD": "qa_android_keyalias_password",
+  
+  "IOS_BUNDLE_ID": "com.test.ios_bundle.qa",
+  "IOS_SKU": "com.test.ios_sku.qa",
+  "IOS_VERSION_CODE": "0.1.1",
+  "IOS_BUILD_ID": "1.0",
+  "IOS_TEAM_ID": "IOS_TEAM_ID",
+  "IOS_APPLE_ID": "qa@test.co",
+  "IOS_APP_ID": "1234567890",
+  "IOS_SIGNING_ENTITY": "QA Signing Identity",
+  "IOS_PROVISIONING_PROFILE": "BuildConfig/qaMobileProvision.mobileprovision",
+  "IOS_API_KEY": "BuildConfig/QA_AuthKey_XXXXXX.p8",
+  "IOS_APP_NAME": "QA iOS App",
+
+  "APPSFLYER_APP_ID": "id123456789",
+  "APPSFLYER_DEV_KEY": "ABCDEFGHIJKLMNQPRD"
+}
