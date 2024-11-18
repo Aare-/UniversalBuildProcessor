@@ -51,8 +51,8 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
             string GetArgumentDebugValue(string argName, string dev = null) 
             {
                 var value = GetArgument(argName, def);
-                
-                Debug.Log($"{BuildProcessor.TAG} Argument '{argName}' value: '{value}'")
+
+                Debug.Log($"{BuildProcessor.TAG} Argument '{argName}' value: '{value}'");
 
                 return value;
             }
