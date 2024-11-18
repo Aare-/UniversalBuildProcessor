@@ -8,7 +8,7 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
     public class ConfigurationGoogle
     {
         //Google
-        [JsonProperty("GOOGLE_WEB_CLIENT_ID", Required = Required.Always)] 
+        [JsonProperty("GOOGLE_WEB_CLIENT_ID")] 
         public string GoogleWebClientID;
     }
 }
