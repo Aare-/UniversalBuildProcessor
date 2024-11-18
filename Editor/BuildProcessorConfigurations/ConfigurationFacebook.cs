@@ -9,7 +9,7 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
     {
         //Facebook
         [DebugConfigField]
-        [JsonProperty("FACEBOOK_APP_ID", Required = Required.Always)] 
+        [JsonProperty("FACEBOOK_APP_ID")] 
         public string FacebookAppID;
     }
 }

@@ -8,11 +8,11 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
     public class ConfigurationAdmob
     {
         [DebugConfigFieldAttribute]
-        [JsonProperty("ANDROID_ADMOB_APP_ID", Required = Required.Always)] 
+        [JsonProperty("ANDROID_ADMOB_APP_ID")] 
         public string AndroidAdmobAppId;
         
         [DebugConfigFieldAttribute]
-        [JsonProperty("IOS_ADMOB_APP_ID", Required = Required.Always)] 
+        [JsonProperty("IOS_ADMOB_APP_ID")] 
         public string IosAdmobAppId;
         
         [JsonProperty("NO_AD_COUNTRY_CODES")] 

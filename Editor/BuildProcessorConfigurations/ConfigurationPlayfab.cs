@@ -10,11 +10,11 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
         //PlayFab
         [DebugConfigFieldAttribute]
         [EnsureNotPlaceholder]
-        [JsonProperty("PLAYFAB_TITLE_ID", Required = Required.Always)] 
+        [JsonProperty("PLAYFAB_TITLE_ID")] 
         public string PlayFabTitleId;
         
         [EnsureNotPlaceholder]
-        [JsonProperty("PLAYFAB_DEV_KEY", Required = Required.Always)] 
+        [JsonProperty("PLAYFAB_DEV_KEY")] 
         public string PlayFabDevKey;
     }
 }

@@ -9,10 +9,10 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
     {
         //AppsFlyer
         [DebugConfigFieldAttribute]
-        [JsonProperty("APPSFLYER_APP_ID", Required = Required.Always)] 
+        [JsonProperty("APPSFLYER_APP_ID")] 
         public string AppsFlyerAppId;
         
-        [JsonProperty("APPSFLYER_DEV_KEY", Required = Required.Always)] 
+        [JsonProperty("APPSFLYER_DEV_KEY")] 
         public string AppsFlyerDevKey;
     }
 }
