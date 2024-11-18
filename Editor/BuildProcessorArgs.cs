@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace AppleAuthSample.Editor
+namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
 {
     public class BuildProcessorArgs
     {
@@ -44,14 +44,23 @@ namespace AppleAuthSample.Editor
                 
                 if (def == null)
                     throw new UnityEditor.Build.BuildFailedException($"Obligatory command line argument {argName} missing");
-
+                
                 return def;
             }
+
+            string GetArgumentDebugValue(string argName, string dev = null) 
+            {
+                var value = GetArgument(argName, def);
+                
+                Debug.Log($"{BuildProcessor.TAG} Argument '{argName}' value: '{value}'")
+
+                return value;
+            }
             
-            BuildTarget = GetArgument("buildTarget");
-            BuildName = GetArgument("buildName");
-            BuildEnvironment = GetArgument("buildEnvironment");
-            OutputPath = GetArgument("outputPath");
+            BuildTarget = GetArgumentDebugValue("buildTarget");
+            BuildName = GetArgumentDebugValue("buildName");
+            BuildEnvironment = GetArgumentDebugValue("buildEnvironment");
+            OutputPath = GetArgumentDebugValue("outputPath");
             _UseSemVer = args.Any(x => x.StartsWith("-semVer"));
 
             if (_UseSemVer)
