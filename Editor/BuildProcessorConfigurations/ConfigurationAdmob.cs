@@ -15,7 +15,7 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
         [JsonProperty("IOS_ADMOB_APP_ID", Required = Required.Always)] 
         public string IosAdmobAppId;
         
-        [JsonProperty("NO_AD_COUNTRY_CODES", Required = Required.AllowNull)] 
+        [JsonProperty("NO_AD_COUNTRY_CODES")] 
         public string[] NoAdCountryCodes;
         
         [JsonProperty("TEST_AD_DEVICE_ID")] 
