@@ -131,16 +131,20 @@ public partial class BuildProcessor
         
         Debug.Log($"{TAG} - Found PlayFab SDK, updating values...");
         
-        var pfModel = AssetDatabase.LoadAssetAtPath<ScriptableObject>(PLAYFAB_CONFIG_PATH);
+        var pfModel = AssetDatabase.LoadMainAssetAtPath(PLAYFAB_CONFIG_PATH);
         var config = ConfigurationManagerInstance.GetConfig<ConfigurationPlayfab>();
         
-        pfModel.GetType()
-            .GetProperty("TitleId", BindingFlags.Instance | BindingFlags.Public)
-            .SetValue(pfModel, config.PlayFabTitleId, null);
+        // Setting using reflection to avoid referencing PlayFab from plugin...
+        pfModel
+            .GetType()
+            .GetField("TitleId", BindingFlags.Instance | BindingFlags.Public)
+            .SetValue(pfModel, config.PlayFabTitleId);
         
-        pfModel.GetType()
-            .GetProperty("DeveloperSecretKey", BindingFlags.Instance | BindingFlags.Public)
-            .SetValue(pfModel, config.PlayFabDevKey, null);
+        // Setting using reflection to avoid referencing PlayFab from plugin...
+        pfModel
+            .GetType()
+            .GetField("DeveloperSecretKey", BindingFlags.Instance | BindingFlags.Public)
+            .SetValue(pfModel, config.PlayFabDevKey);
         
         EditorUtility.SetDirty(pfModel);
         AssetDatabase.SaveAssets();

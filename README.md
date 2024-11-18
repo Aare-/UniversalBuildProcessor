@@ -9,6 +9,10 @@ Place the config files named `QA_CONFIG_JSON_NAME` in the `CONFIG_PATH_FOLDER` f
 `PROD_CONFIG_JSON_NAME` json file should be only used during production build and removed after.
 Place your optional and custom Scriptable Objects inside `CONFIG_MODEL_PATH_FOLDER`.
 
+## Sample Config Files
+To get started with `build-config.json` you can find sample configs inside `UniversalBuildProcessor\Resources\TestConfigs` folder.
+Only the sections with data for Android and iOS is mandatory.
+
 ## Mandatory Configs
 Values from following classes have to be present in config.json
 - `ConfigurationAndroid.cs`
