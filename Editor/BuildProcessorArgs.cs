@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using UnityEngine;
 
 namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
 {
@@ -48,7 +49,7 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
                 return def;
             }
 
-            string GetArgumentDebugValue(string argName, string dev = null) 
+            string GetArgumentDebugValue(string argName, string def = null) 
             {
                 var value = GetArgument(argName, def);
 
