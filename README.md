@@ -38,7 +38,7 @@ To do that one has to:
 If in doubt, mirror the implementation of built in optional models found in `UniversalBuildProcessor/Editor/BuildProcessorConfigurations` and `UniversalBuildProcessor/Editor/BuildProcessorModel`
 
 ## Annotations
-In addition to JsonProperty annotation two additional annotations can be added to config classes:
+In addition to JsonProperty annotation two additional annotations can be added to fields:
 - `DebugConfigFieldAttribute` Add this one to any field you want to have printed during build (helps verify correct value was used)
 - `EnsureNotPlaceholder` Add this one to any field you want to make sure is different between qa and prod config. Build will fail if this is not the case (f.e. you forgot to put prod values)
 
