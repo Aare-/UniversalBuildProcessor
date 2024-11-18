@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using DG.DemiEditor;
 using Facebook.Unity.Editor;
 using Facebook.Unity.Settings;
 using Plugins.UniversalBuildProcessor.Editor.Attributes;
