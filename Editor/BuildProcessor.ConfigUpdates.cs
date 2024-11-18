@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -130,7 +131,7 @@ public partial class BuildProcessor
         
         Debug.Log($"{TAG} - Found PlayFab SDK, updating values...");
         
-        var pfModel = AssetDatabase.LoadAssetAtPath<ScriptableObject>(path);
+        var pfModel = AssetDatabase.LoadAssetAtPath<ScriptableObject>(PLAYFAB_CONFIG_PATH);
         var config = ConfigurationManagerInstance.GetConfig<ConfigurationPlayfab>();
         
         pfModel.GetType().InvokeMember(
@@ -138,14 +139,14 @@ public partial class BuildProcessor
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty,
             Type.DefaultBinder, 
             pfModel, 
-            config.PlayFabTitleId);
+            new object[] { config.PlayFabTitleId });
         
         pfModel.GetType().InvokeMember(
             "DeveloperSecretKey",
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty,
             Type.DefaultBinder, 
             pfModel, 
-            config.PlayFabDevKey);
+            new object[] { config.PlayFabDevKey });
         
         EditorUtility.SetDirty(pfModel);
         AssetDatabase.SaveAssets();
