@@ -20,4 +20,9 @@ public partial class BuildProcessor
      * Use this name for PROD build config
      */
     private const string PROD_CONFIG_JSON_NAME = "prod-build-config.json";
+
+    /**
+     * Path to playfab PlayFabSharedSetting (if exists)
+     */
+    private const string PLAYFAB_CONFIG_PATH = "Assets/PlayFabSDK/Shared/Public/Resources/PlayFabSharedSettings.asset";
 }

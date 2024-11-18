@@ -7,7 +7,6 @@ using Facebook.Unity.Settings;
 using Plugins.UniversalBuildProcessor.Editor.Attributes;
 using Plugins.UniversalBuildProcessor.Editor.BuildProcessorModel;
 using UnityEditor;
-using UnityEditor.Compilation;
 using UnityEngine;
 using UniversalBuildProcessor.Editor.BuildProcessorConfiguration;
 
@@ -35,7 +34,7 @@ public partial class BuildProcessor
         FacebookSettings.SelectedAppIndex = selectedAppIndex; 
         ManifestMod.GenerateManifest();
         
-        Console.WriteLine(
+        Debug.Log(
             $"{TAG} Configured Facebook App Id {FacebookSettings.AppId} at index {FacebookSettings.SelectedAppIndex}");
 
         model.AppID = config.FacebookAppID;
@@ -125,20 +124,30 @@ public partial class BuildProcessor
 
     private static void TryUpdateConfigurationPlayFab()
     {
-        var (exists, path) = TryGetPathForModelFile<ConfigurationModelPlayfab>();
+        if (!File.Exists(PLAYFAB_CONFIG_PATH)) {
+            Debug.Log($"{TAG} - Skipping PlayFab SDK, could not find config at: {PLAYFAB_CONFIG_PATH}");
+        }
         
-        if (!exists)
-            return;
+        Debug.Log($"{TAG} - Found PlayFab SDK, updating values...");
         
-        var model = (ConfigurationModelPlayfab)AssetDatabase.LoadAssetAtPath(
-            path, 
-            typeof(ConfigurationModelPlayfab));
+        var pfModel = AssetDatabase.LoadAssetAtPath<ScriptableObject>(path);
         var config = ConfigurationManagerInstance.GetConfig<ConfigurationPlayfab>();
         
-        model.TitleId = config.PlayFabTitleId;
-        model.DevKey = config.PlayFabDevKey;
+        pfModel.GetType().InvokeMember(
+            "TitleId",
+            BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty,
+            Type.DefaultBinder, 
+            pfModel, 
+            config.PlayFabTitleId);
         
-        EditorUtility.SetDirty(model);
+        pfModel.GetType().InvokeMember(
+            "DeveloperSecretKey",
+            BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty,
+            Type.DefaultBinder, 
+            pfModel, 
+            config.PlayFabDevKey);
+        
+        EditorUtility.SetDirty(pfModel);
         AssetDatabase.SaveAssets();
     }
 
