@@ -62,7 +62,7 @@ public partial class BuildProcessor
         // Custom configuration
         TryUpdateCustomConfiguration();
 
-        switch (BuildProcessorArgsInstance.BuildTarget)
+        switch (BuildProcessorArgsInstance.BuildTarget.ToLowerInvariant())
         {
             case BUILD_TARGET_ANDROID:
                 BuildAndroidInternal(ConfigurationManagerInstance.GetConfig<ConfigurationAndroid>());
