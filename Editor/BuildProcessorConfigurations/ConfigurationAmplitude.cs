@@ -12,10 +12,10 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
         [JsonProperty("AMPLITUDE_API_KEY", Required = Required.Always)] 
         public string AmplitudeAPIKey;
         
-        [JsonProperty("AMPLITUDE_SERVER_TIMEZONE", Required = Required.Always)] 
+        [JsonProperty("AMPLITUDE_SERVER_TIMEZONE")] 
         public string AmplitudeServerZone;
         
-        [JsonProperty("AMPLITUDE_SERVER_URL", Required = Required.Always)] 
+        [JsonProperty("AMPLITUDE_SERVER_URL")] 
         public string AmplitudeServerUrl;
     }
 }
