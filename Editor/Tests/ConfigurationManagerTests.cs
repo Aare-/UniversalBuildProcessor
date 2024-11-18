@@ -51,7 +51,7 @@ namespace Plugins.UniversalBuildProcessor.Tests.Editor
         }
         
         [Test]
-        public void TestDoesNotAllowDuplicatedValues()
+        public void TestDoesNotAllowPlaceholderValues()
         {
             Assert.Throws<BuildFailedException>(() =>
             {
@@ -59,9 +59,9 @@ namespace Plugins.UniversalBuildProcessor.Tests.Editor
                     true,
                     true,
                     (_) => Path.Join(RESOURCES_CONFIG_PATH, TEST_CONFIG_QA));
-                var appsflyerConfig = configManager.GetConfig<ConfigurationAppsFlyer>();
+                var iOSConfig = configManager.GetConfig<ConfigurationiOS>();
 
-                Assert.AreEqual(appsflyerConfig.AppsFlyerAppId, QA_APPSFLYER_APP_ID);
+                Assert.AreEqual(iOSConfig.IOSTeamID, "IOS_TEAM_ID");
             });
         }
         

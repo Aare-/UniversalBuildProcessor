@@ -1,7 +1,9 @@
 {
-    "name": "UniversalBuildProcessor",
+    "name": "UniversalBuildProcessorEditor",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:40bdffdc1944a4e82853784aa901019d"
+    ],
     "includePlatforms": [
         "Editor"
     ],
