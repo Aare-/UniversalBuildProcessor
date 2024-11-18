@@ -1,0 +1,8 @@
+{
+	"name": "com.filiploster.universalbuildprocessor",
+	"displayName": "UniversalBuildProcessor",
+	"version": "1.0.0",
+	"unity": "2022.3.16f1",
+	"description": "Universal Build Processor script for unity. Supports mobile projects for iOS and Android. Allows to easilly configure unity with values and secrets stored in build-config.json during CI build.",
+	"license": "Creative Commons Zero"
+}
