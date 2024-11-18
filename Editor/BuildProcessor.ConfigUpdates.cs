@@ -134,19 +134,13 @@ public partial class BuildProcessor
         var pfModel = AssetDatabase.LoadAssetAtPath<ScriptableObject>(PLAYFAB_CONFIG_PATH);
         var config = ConfigurationManagerInstance.GetConfig<ConfigurationPlayfab>();
         
-        pfModel.GetType().InvokeMember(
-            "TitleId",
-            BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty,
-            Type.DefaultBinder, 
-            pfModel, 
-            new object[] { config.PlayFabTitleId });
+        pfModel.GetType()
+            .GetProperty("TitleId", BindingFlags.Instance | BindingFlags.Public)
+            .SetValue(pfModel, config.PlayFabTitleId, null);
         
-        pfModel.GetType().InvokeMember(
-            "DeveloperSecretKey",
-            BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty,
-            Type.DefaultBinder, 
-            pfModel, 
-            new object[] { config.PlayFabDevKey });
+        pfModel.GetType()
+            .GetProperty("DeveloperSecretKey", BindingFlags.Instance | BindingFlags.Public)
+            .SetValue(pfModel, config.PlayFabDevKey, null);
         
         EditorUtility.SetDirty(pfModel);
         AssetDatabase.SaveAssets();
