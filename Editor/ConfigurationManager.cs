@@ -123,6 +123,20 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
             {
                 if (field.GetCustomAttribute<EnsureNotPlaceholderAttribute>() != null)
                 {
+                    if (field.GetValue(qaConfig) == null) 
+                    {
+                        Debug.LogWarning($"{BuildProcessor.TAG} QA config is missing field: {field.Name}");
+                        isValid = false;
+                        continue;
+                    }
+                    
+                    if (field.GetValue(prodConfig) == null) 
+                    {
+                        Debug.LogWarning($"{BuildProcessor.TAG} PROD config is missing field: {field.Name}");
+                        isValid = false;
+                        continue;
+                    }
+                    
                     var qaValue = field.GetValue(qaConfig).ToString();
                     var prodValue = field.GetValue(prodConfig).ToString();
 
