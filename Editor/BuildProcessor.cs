@@ -65,11 +65,11 @@ public partial class BuildProcessor
         switch (BuildProcessorArgsInstance.BuildTarget.ToLowerInvariant())
         {
             case BUILD_TARGET_ANDROID:
-                BuildAndroidInternal(ConfigurationManagerInstance.GetConfig<ConfigurationAndroid>());
+                BuildAndroidInternal(ConfigurationManagerInstance.GetConfig<ConfigurationAndroid>(), IsProd);
                 break;
             
             case BUILD_TARGET_IOS:
-                BuildIOSInternal(ConfigurationManagerInstance.GetConfig<ConfigurationiOS>());
+                BuildIOSInternal(ConfigurationManagerInstance.GetConfig<ConfigurationiOS>(), IsProd);
                 break;
         }
 
