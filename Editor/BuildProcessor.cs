@@ -69,7 +69,7 @@ public partial class BuildProcessor
                 break;
             
             case BUILD_TARGET_IOS:
-                BuildIOSInternal(ConfigurationManagerInstance.GetConfig<ConfigurationiOS>(), IsProd);
+                BuildIOSInternal(ConfigurationManagerInstance.GetConfig<ConfigurationiOS>());
                 break;
         }
 
