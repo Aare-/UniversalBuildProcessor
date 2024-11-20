@@ -14,7 +14,6 @@
   "IOS_BUILD_ID": "1.0",
   "IOS_TEAM_ID": "PROD_IOS_TEAM_ID",
   "IOS_APPLE_ID": "prod@test.co",
-  "IOS_APP_ID": "0987654321",
   "IOS_SIGNING_ENTITY": "PROD Signing Identity",
   "IOS_PROVISIONING_PROFILE": "BuildConfig/prodMobileProvision.mobileprovision",
   "IOS_APP_NAME": "PROD iOS App",

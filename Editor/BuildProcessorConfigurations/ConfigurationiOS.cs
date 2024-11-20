@@ -30,10 +30,6 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
         public string IOSAppleID;
         
         [EnsureNotPlaceholder]
-        [JsonProperty("IOS_APP_ID", Required = Required.Always)] 
-        public string IOSAppID;
-        
-        [EnsureNotPlaceholder]
         [JsonProperty("IOS_SIGNING_ENTITY", Required = Required.Always)] 
         public string IOSSigningEntity;
         

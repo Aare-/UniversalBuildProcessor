@@ -14,7 +14,6 @@
   "IOS_BUILD_ID": "1.0",
   "IOS_TEAM_ID": "IOS_TEAM_ID",
   "IOS_APPLE_ID": "qa@test.co",
-  "IOS_APP_ID": "1234567890",
   "IOS_SIGNING_ENTITY": "QA Signing Identity",
   "IOS_PROVISIONING_PROFILE": "BuildConfig/qaMobileProvision.mobileprovision",
   "IOS_APP_NAME": "QA iOS App",
