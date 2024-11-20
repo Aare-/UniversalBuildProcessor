@@ -40,9 +40,6 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
         [JsonProperty("IOS_PROVISIONING_PROFILE", Required = Required.Always)] 
         public string IOSProvisioningProfile;
         
-        [JsonProperty("IOS_API_KEY", Required = Required.Always)] 
-        public string IOSAPIKey;
-        
         [DebugConfigFieldAttribute]
         [JsonProperty("IOS_APP_NAME", Required = Required.Always)] 
         public string IOSAppName;

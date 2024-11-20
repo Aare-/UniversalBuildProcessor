@@ -17,7 +17,6 @@
   "IOS_APP_ID": "1234567890",
   "IOS_SIGNING_ENTITY": "QA Signing Identity",
   "IOS_PROVISIONING_PROFILE": "BuildConfig/qaMobileProvision.mobileprovision",
-  "IOS_API_KEY": "BuildConfig/QA_AuthKey_XXXXXX.p8",
   "IOS_APP_NAME": "QA iOS App",
 
   "APPSFLYER_APP_ID": "id123456789",
