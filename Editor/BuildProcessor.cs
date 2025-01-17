@@ -11,8 +11,10 @@ public partial class BuildProcessor
 
     private const string BUILD_TARGET_ANDROID = "android";
     private const string BUILD_TARGET_IOS = "ios";
+
+    private static bool IsProd => _IsProdResolver;
     
-    private static bool IsProd => BuildProcessorArgsInstance.BuildEnvironment == PRODUCTION_BUILD_ENVIRONMENT;
+    private static Action<bool> _IsProdResolver = null;
 
     private static BuildProcessorArgs BuildProcessorArgsInstance
     {
@@ -47,11 +49,17 @@ public partial class BuildProcessor
     private static BuildProcessorArgs _BuildProcessorArgsInstance;
     
     private static ConfigurationManager _ConfigurationManagerInstance;
-
+    
     public static void Build()
     {
         Debug.Log($"{TAG} Starting build processor ...");
 
+        #region Resolve dependencies
+        _IsProdResolver = () => {
+            BuildProcessorArgsInstance.BuildEnvironment == PRODUCTION_BUILD_ENVIRONMENT;
+        };
+        #endregion
+        
         UpdateConfiguration();
 
         switch (BuildProcessorArgsInstance.BuildTarget.ToLowerInvariant())
@@ -67,8 +75,7 @@ public partial class BuildProcessor
 
         _BuildProcessorArgsInstance = null;
     }
-
-    [MenuItem("Tools/UniversalBuildProcessor/Update Configuration")]
+    
     public static void UpdateConfiguration() {
         Debug.Log($"{TAG} Updating build configuration ...");
         
@@ -82,5 +89,23 @@ public partial class BuildProcessor
         
         // Custom configuration
         TryUpdateCustomConfiguration();
+    }
+
+    [MenuItem("Tools/UniversalBuildProcessor/Update With Configuration/Prod")]
+    public static void UpdateConfigurationProd() {
+        #region Resolve dependencies
+        _IsProdResolver = () => { return true; };
+        #endregion
+        
+        UpdateConfiguration();
+    }
+    
+    [MenuItem("Tools/UniversalBuildProcessor/Update With Configuration/Qa")]
+    public static void UpdateConfigurationQa() {
+        #region Resolve dependencies
+        _IsProdResolver = () => { return false; };
+        #endregion
+        
+        UpdateConfiguration();
     }
 }
