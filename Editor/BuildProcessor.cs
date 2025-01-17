@@ -13,9 +13,9 @@ public partial class BuildProcessor
     private const string BUILD_TARGET_ANDROID = "android";
     private const string BUILD_TARGET_IOS = "ios";
 
-    private static bool IsProd => _IsProdResolver;
+    private static bool IsProd => _IsProdResolver.Invoke();
     
-    private static Action<bool> _IsProdResolver = null;
+    private static Func<bool> _IsProdResolver = null;
 
     private static BuildProcessorArgs BuildProcessorArgsInstance
     {
@@ -57,7 +57,7 @@ public partial class BuildProcessor
 
         #region Resolve dependencies
         _IsProdResolver = () => {
-            BuildProcessorArgsInstance.BuildEnvironment == PRODUCTION_BUILD_ENVIRONMENT;
+            return BuildProcessorArgsInstance.BuildEnvironment == PRODUCTION_BUILD_ENVIRONMENT;
         };
         #endregion
         
