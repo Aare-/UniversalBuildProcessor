@@ -78,7 +78,7 @@ public partial class BuildProcessor
     }
     
     public static void UpdateConfiguration() {
-        Debug.Log($"{TAG} Updating build configuration ...");
+        Debug.Log($"{TAG} Updating build configuration (is prod: {IsProd}) ...");
         
         // Built-in optional configuration
         TryUpdateConfigurationAmplitude();
