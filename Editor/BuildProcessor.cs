@@ -50,17 +50,8 @@ public partial class BuildProcessor
     public static void Build()
     {
         Debug.Log($"{TAG} Starting build processor ...");
-        
-        // Built-in optional configuration
-        TryUpdateConfigurationAmplitude();
-        TryUpdateConfigurationAdmob();
-        TryUpdateConfigurationGoogle();
-        TryUpdateConfigurationAppsFlyer();
-        TryUpdateConfigurationFacebook();
-        TryUpdateConfigurationPlayFab();
-        
-        // Custom configuration
-        TryUpdateCustomConfiguration();
+
+        UpdateConfiguration();
 
         switch (BuildProcessorArgsInstance.BuildTarget.ToLowerInvariant())
         {
@@ -74,5 +65,21 @@ public partial class BuildProcessor
         }
 
         _BuildProcessorArgsInstance = null;
+    }
+
+    [MenuItem("Tools/UniversalBuildProcessor/Update Configuration")]
+    public static void UpdateConfiguration() {
+        Debug.Log($"{TAG} Updating build configuration ...");
+        
+        // Built-in optional configuration
+        TryUpdateConfigurationAmplitude();
+        TryUpdateConfigurationAdmob();
+        TryUpdateConfigurationGoogle();
+        TryUpdateConfigurationAppsFlyer();
+        TryUpdateConfigurationFacebook();
+        TryUpdateConfigurationPlayFab();
+        
+        // Custom configuration
+        TryUpdateCustomConfiguration();
     }
 }
