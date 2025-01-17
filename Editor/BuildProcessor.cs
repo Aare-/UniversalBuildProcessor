@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using UnityEditor;
 using UniversalBuildProcessor.Editor.BuildProcessorConfiguration;
 
 public partial class BuildProcessor
