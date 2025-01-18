@@ -20,9 +20,7 @@ public partial class BuildProcessor
         if (!exists)
             return;
         
-        var model = (ConfigurationModelFacebook)AssetDatabase.LoadAssetAtPath(
-            path, 
-            typeof(ConfigurationModelFacebook));
+        var model = LoadAssetForceRefresh<ConfigurationModelFacebook>(path);
         var config = ConfigurationManagerInstance.GetConfig<ConfigurationFacebook>();
         
         var selectedAppIndex = FacebookSettings.AppIds.IndexOf(config.FacebookAppID);
@@ -50,10 +48,8 @@ public partial class BuildProcessor
         
         if (!exists)
             return;
-        
-        var model = (ConfigurationModelAmplitude)AssetDatabase.LoadAssetAtPath(
-            path, 
-            typeof(ConfigurationModelAmplitude));
+
+        var model = LoadAssetForceRefresh<ConfigurationModelAmplitude>(path);
         var config = ConfigurationManagerInstance.GetConfig<ConfigurationAmplitude>();
 
         model.AmplitudeAPIKey = config.AmplitudeAPIKey;
@@ -70,10 +66,8 @@ public partial class BuildProcessor
         
         if (!exists)
             return;
-        
-        var model = (ConfigurationModelAdmob)AssetDatabase.LoadAssetAtPath(
-            path, 
-            typeof(ConfigurationModelAdmob));
+
+        var model = LoadAssetForceRefresh<ConfigurationModelAdmob>(path);
         var config = ConfigurationManagerInstance.GetConfig<ConfigurationAdmob>();
 
         model.AndroidAdmobAppId = config.AndroidAdmobAppId;
@@ -93,9 +87,7 @@ public partial class BuildProcessor
         if (!exists)
             return;
         
-        var model = (ConfigurationModelAppsflyer)AssetDatabase.LoadAssetAtPath(
-            path, 
-            typeof(ConfigurationModelAppsflyer));
+        var model = LoadAssetForceRefresh<ConfigurationModelAppsflyer>(path);
         var config = ConfigurationManagerInstance.GetConfig<ConfigurationAppsFlyer>();
         
         model.AppId = config.AppsFlyerAppId;
@@ -111,10 +103,8 @@ public partial class BuildProcessor
         
         if (!exists)
             return;
-        
-        var model = (ConfigurationModelGoogle)AssetDatabase.LoadAssetAtPath(
-            path, 
-            typeof(ConfigurationModelGoogle));
+
+        var model = LoadAssetForceRefresh<ConfigurationModelGoogle>(path); 
         var config = ConfigurationManagerInstance.GetConfig<ConfigurationGoogle>();
         
         model.GoogleWebClientID = config.GoogleWebClientID;
@@ -168,7 +158,9 @@ public partial class BuildProcessor
                 if (!exists)
                     continue;       
                 
-                var model = AssetDatabase.LoadAssetAtPath(
+                AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
+                var model =  
+                    AssetDatabase.LoadAssetAtPath(
                     path, 
                     modelType);
                 var config = ConfigurationManagerInstance.GetConfig(configType);
@@ -198,5 +190,13 @@ public partial class BuildProcessor
                 AssetDatabase.SaveAssets();
             }
         }
+    }
+
+    private static T LoadAssetForceRefresh<T>(string assetPath) {
+        AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
+        
+        return (T)AssetDatabase.LoadAssetAtPath(
+            assetPath, 
+            typeof(T));
     }
 }
