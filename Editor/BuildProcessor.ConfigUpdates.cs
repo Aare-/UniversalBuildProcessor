@@ -192,7 +192,7 @@ public partial class BuildProcessor
         }
     }
 
-    private static T LoadAssetForceRefresh<T>(string assetPath) {
+    private static T LoadAssetForceRefresh<T>(string assetPath) where T : UnityEngine.Object {
         AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
         
         return (T)AssetDatabase.LoadAssetAtPath(
