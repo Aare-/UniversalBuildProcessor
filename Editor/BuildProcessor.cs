@@ -80,6 +80,8 @@ public partial class BuildProcessor
     public static void UpdateConfiguration() {
         Debug.Log($"{TAG} Updating build configuration (is prod: {IsProd}) ...");
         
+        AssetDatabase.Refresh();
+        
         // Built-in optional configuration
         TryUpdateConfigurationAmplitude();
         TryUpdateConfigurationAdmob();
