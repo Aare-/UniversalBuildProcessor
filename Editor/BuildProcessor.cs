@@ -54,8 +54,14 @@ public partial class BuildProcessor
     public static void Build()
     {
         Debug.Log($"{TAG} Starting build processor ...");
-
+        
         #region Resolve dependencies
+
+        #region Cleanup references
+        _BuildProcessorArgsInstance = null;
+        _ConfigurationManagerInstance = null;
+        #endregion
+        
         _IsProdResolver = () => {
             return BuildProcessorArgsInstance.BuildEnvironment == PRODUCTION_BUILD_ENVIRONMENT;
         };
@@ -97,6 +103,12 @@ public partial class BuildProcessor
     [MenuItem("Tools/UniversalBuildProcessor/Update With Configuration/Prod")]
     public static void UpdateConfigurationProd() {
         #region Resolve dependencies
+        
+        #region Cleanup references
+        _BuildProcessorArgsInstance = null;
+        _ConfigurationManagerInstance = null;
+        #endregion
+        
         _IsProdResolver = () => { return true; };
         #endregion
         
@@ -106,6 +118,12 @@ public partial class BuildProcessor
     [MenuItem("Tools/UniversalBuildProcessor/Update With Configuration/Qa")]
     public static void UpdateConfigurationQa() {
         #region Resolve dependencies
+        
+        #region Cleanup references
+        _BuildProcessorArgsInstance = null;
+        _ConfigurationManagerInstance = null;
+        #endregion
+        
         _IsProdResolver = () => { return false; };
         #endregion
         
