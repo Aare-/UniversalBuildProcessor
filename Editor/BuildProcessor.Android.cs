@@ -14,7 +14,7 @@ public partial class BuildProcessor
         
         if (BuildProcessorArgsInstance.UseSemVer) 
         {
-            PlayerSettings.bundleVersion = BuildProcessorArgsInstance.BuildVersion;
+            PlayerSettings.bundleVersion = GetBuildNumber();
             PlayerSettings.Android.bundleVersionCode = GetVersionCode();            
         } 
         else 
@@ -71,6 +71,30 @@ public partial class BuildProcessor
             }
 
             return 1000000 + Int32.Parse(BuildProcessorArgsInstance.RunNumber);
+        }
+        
+        string GetBuildNumber()
+        {
+            var buildVersion = BuildProcessorArgsInstance.BuildVersion;
+            var runNumber = BuildProcessorArgsInstance.RunNumber;
+        
+            if (string.IsNullOrEmpty(buildVersion)) 
+            {
+                throw new UnityEditor.Build.BuildFailedException($"{TAG} Could not get Android build number, missing build version argument");
+            }
+
+            if (string.IsNullOrEmpty(runNumber)) 
+            {
+                throw new UnityEditor.Build.BuildFailedException($"{TAG} Could not get Android build number, missing run number argument");
+            }
+
+            var split = buildVersion.Split(".");
+            var joined = string.Join(".", split[0], split[1]);
+            joined = string.Join(".", joined, runNumber);
+
+            Debug.Log($"{TAG} Getting Android build number as: {joined}");
+
+            return joined;
         }
     }
 }
