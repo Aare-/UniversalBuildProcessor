@@ -3,8 +3,10 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+#if !UBP_DISABLE_FACEBOOK
 using Facebook.Unity.Editor;
 using Facebook.Unity.Settings;
+#endif
 using Plugins.UniversalBuildProcessor.Editor.Attributes;
 using Plugins.UniversalBuildProcessor.Editor.BuildProcessorModel;
 using UnityEditor;
@@ -15,6 +17,7 @@ public partial class BuildProcessor
 {
     private static void TryUpdateConfigurationFacebook()
     {
+#if !UBP_DISABLE_FACEBOOK
         var (exists, path) = TryGetPathForModelFile<ConfigurationModelFacebook>();
         
         if (!exists)
@@ -40,6 +43,7 @@ public partial class BuildProcessor
         
         EditorUtility.SetDirty(model);
         AssetDatabase.SaveAssets();
+#endif
     }
 
     private static void TryUpdateConfigurationAmplitude()
@@ -115,8 +119,10 @@ public partial class BuildProcessor
 
     private static void TryUpdateConfigurationPlayFab()
     {
-        if (!File.Exists(PLAYFAB_CONFIG_PATH)) {
+        if (!File.Exists(PLAYFAB_CONFIG_PATH)) 
+        {
             Debug.Log($"{TAG} - Skipping PlayFab SDK, could not find config at: {PLAYFAB_CONFIG_PATH}");
+            return;
         }
         
         Debug.Log($"{TAG} - Found PlayFab SDK, updating values...");

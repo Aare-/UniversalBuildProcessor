@@ -10,6 +10,8 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
 {
     public class ConfigurationManager
     {
+        private delegate object GetConfigDelegate(Type type);
+        
         private Dictionary<Type, object> _ParsedConfigs = new ();
         
         private string _QAConfigJson;
@@ -17,16 +19,28 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
         private string _ProdConfigJson;
 
         private bool _IsProd;
+        
+        private GetConfigDelegate _ResolveGetConfig;
 
         public ConfigurationManager(bool isProd, bool loadFromResources, Func<bool, string> getConfigPath)
         {
             _IsProd = isProd;
+            
             _QAConfigJson = loadFromResources
                 ? ReadConfigResources(getConfigPath(false))
                 : ReadConfig(getConfigPath(false));
-            _ProdConfigJson = loadFromResources
-                ? ReadConfigResources(getConfigPath(true))
-                : ReadConfig(getConfigPath(true));
+
+            if (_IsProd) 
+            {
+                _ProdConfigJson = loadFromResources
+                    ? ReadConfigResources(getConfigPath(true))
+                    : ReadConfig(getConfigPath(true));
+                _ResolveGetConfig = ResolveGetConfigProd;
+            }
+            else 
+            {
+                _ResolveGetConfig = ResolveGetConfigQA;
+            }
         }
 
         private string ReadConfig(string configPath)
@@ -56,35 +70,33 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
         
         public object GetConfig(Type type)
         {
-            
             if (_ParsedConfigs.TryGetValue(type, out var config))
                 return config;
+
+            return _ResolveGetConfig(type);
+        }
+
+        private object ResolveGetConfigQA(Type type) 
+        {
+            var deserObjQa = DeserializeConfig(_QAConfigJson, type);
             
-            var deserObjProd = JsonConvert.DeserializeObject(_ProdConfigJson, type);
-            var deserObjQa = JsonConvert.DeserializeObject(_QAConfigJson, type);
-            
-            if (deserObjProd == null)
-            {
-                throw new UnityEditor.Build.BuildFailedException($"{BuildProcessor.TAG} Could not deserialize JSON to type {type} at path: {_ProdConfigJson}");
-            }
-            
-            if (deserObjQa == null)
-            {
-                throw new UnityEditor.Build.BuildFailedException($"{BuildProcessor.TAG} Could not deserialize JSON to type {type} at path: {_QAConfigJson}");
-            }
-            
-            if (_IsProd)
-            {
-                _ParsedConfigs[type] = deserObjProd;
-            }
-            else
-            {
-                _ParsedConfigs[type] = deserObjQa;
-            }
-            
+            _ParsedConfigs[type] = deserObjQa;
+                
             PrintConfigDebug(_ParsedConfigs[type]);
             
-            if (_IsProd && !VerifyConfigValuesConstraints(deserObjQa, deserObjProd))
+            return _ParsedConfigs[type];
+        }
+        
+        private object ResolveGetConfigProd(Type type) 
+        {
+            var deserObjQa = DeserializeConfig(_QAConfigJson, type);
+            var deserObjProd = DeserializeConfig(_ProdConfigJson, type); 
+                
+            _ParsedConfigs[type] = deserObjProd;
+                
+            PrintConfigDebug(_ParsedConfigs[type]);
+
+            if (!VerifyConfigValuesConstraints(deserObjQa, deserObjProd)) 
             {
                 throw new UnityEditor.Build.BuildFailedException($"{BuildProcessor.TAG} Prod config failed value constraints check");
             }
@@ -92,6 +104,18 @@ namespace UniversalBuildProcessor.Editor.BuildProcessorConfiguration
             return _ParsedConfigs[type];
         }
 
+        private object DeserializeConfig(string path, Type type) 
+        {
+            var deserObj = JsonConvert.DeserializeObject(path, type);
+
+            if (deserObj == null)
+            {
+                throw new UnityEditor.Build.BuildFailedException($"{BuildProcessor.TAG} Could not deserialize JSON to type {type} at path: {path}");
+            }
+
+            return deserObj;
+        }
+        
         private void PrintConfigDebug(object config)
         {
             var qaConfigType = config.GetType();

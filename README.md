@@ -26,6 +26,10 @@ To make use of them:
 3. Include keys from matching Configuration class (`UniversalBuildProcessor/Editor/BuildProcessorConfigurations`) in the `build-config.json`
 4. Done: you can reference and read values from the scriptable object as needed and they will be up to date in the build.
 
+## Scripting Define Symbols
+You can configure the plugin using following script define symbols:
+- `UBP_DISABLE_FACEBOOK` To disable dependency on facebook sdk
+
 ## Custom Configs
 You can create custom config with any string value as needed.
 To do that one has to:
