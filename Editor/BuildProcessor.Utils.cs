@@ -42,15 +42,12 @@ public partial class BuildProcessor
             CONFIG_MODEL_PATH_FOLDER,
             $"{attribute.fileName}.asset");
 
-        if (File.Exists(modelPath))
+        if (!File.Exists(modelPath))
         {
-            Debug.Log($"{TAG} Found Config Model: {attribute.fileName}");
-            return (true, modelPath);
+            throw new UnityEditor.Build.BuildFailedException($"{TAG} Model not found at: {modelPath} - did you missplace it?");
         }
-        else
-        {
-            Debug.Log($"{TAG} Skipping Config Model: {attribute.fileName} - missing config file");
-            return (false, null);
-        }
+
+        Debug.Log($"{TAG} Found Config Model: {attribute.fileName}");
+        return (true, modelPath);
     }
 }
